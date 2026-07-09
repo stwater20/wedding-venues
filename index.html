@@ -101,6 +101,7 @@ input.txt{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius
     <option value="fav">收藏優先</option>
   </select></label>
   <label><input type="checkbox" id="fFavOnly"> 只看收藏</label>
+  <label><input type="checkbox" id="fPicks"> 🌸 小木木精選</label>
   <button class="btn" id="btnAdd">＋ 新增飯店</button>
   <button class="btn" id="btnExport">匯出</button>
   <button class="btn" id="btnSync"><span class="sync-dot off" id="syncDot"></span><span id="syncLabel">同步設定</span></button>
@@ -333,6 +334,8 @@ function maxTables(v){
 }
 
 // ============ render ============
+// 小木木精選：最初由女朋友挑選的口袋名單
+const PICKS=new Set(["marriott","mayfull","courtyard-nangang","eslite","illume","renaissance","denwell","amazinghall","humblehouse","mo","courtyard-downtown","miramar"]);
 const galIdx={};
 let cmpSet=new Set();
 
@@ -342,10 +345,12 @@ function render(){
   const budget=+document.getElementById("fBudget").value||0;
   const sort=document.getElementById("fSort").value;
   const favOnly=document.getElementById("fFavOnly").checked;
+  const picksOnly=document.getElementById("fPicks").checked;
 
   let list=allVenues().filter(v=>{
     if(area&&v.area!==area)return false;
     if(favOnly&&!state.favs[v.id])return false;
+    if(picksOnly&&!PICKS.has(v.id))return false;
     if(budget){const mp=minPrice(v);if(mp&&mp>budget)return false}
     if(tables){const mt=maxTables(v);if(mt&&mt<tables)return false}
     return true;
@@ -506,7 +511,7 @@ function populateAreas(){
   const cur=sel.value;
   sel.innerHTML=`<option value="">全部</option>`+[...new Set(allVenues().map(v=>v.area))].map(a=>`<option ${a===cur?"selected":""}>${esc(a)}</option>`).join("");
 }
-["fArea","fTables","fBudget","fSort","fFavOnly"].forEach(id=>document.getElementById(id).addEventListener("input",render));
+["fArea","fTables","fBudget","fSort","fFavOnly","fPicks"].forEach(id=>document.getElementById(id).addEventListener("input",render));
 loadSyncConfig();
 // 一次性設定連結：把 https://.../#setup=<token> 傳給另一半，點開即完成同步設定
 (function(){
