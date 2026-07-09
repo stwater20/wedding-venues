@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>婚宴飯店比較</title>
+<style>
+:root{
+  --bg:#faf7f2;--card:#ffffff;--ink:#2d2a26;--muted:#8a8378;--line:#e8e2d8;
+  --accent:#b0885e;--accent-dark:#8f6a42;--gold:#c9a86a;--rose:#c47b7b;
+  --chip:#f3ede3;--green:#5d8a66;--shadow:0 2px 12px rgba(80,60,30,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+header{background:linear-gradient(135deg,#fdfbf7,#f5eee2);border-bottom:1px solid var(--line);padding:28px 24px 20px;text-align:center}
+header h1{font-size:26px;letter-spacing:2px;color:var(--accent-dark)}
+header p{color:var(--muted);font-size:13px;margin-top:4px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;padding:14px 24px;background:#fffdf9;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.toolbar select,.toolbar input[type=number]{padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:13px;color:var(--ink)}
+.toolbar label{font-size:13px;color:var(--muted)}
+.btn{padding:8px 14px;border:1px solid var(--accent);background:#fff;color:var(--accent-dark);border-radius:8px;font-size:13px;cursor:pointer;transition:.15s}
+.btn:hover{background:var(--accent);color:#fff}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-dark)}
+.btn.small{padding:4px 10px;font-size:12px}
+.sync-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:1px}
+.sync-dot.off{background:#bbb}.sync-dot.ro{background:#e0b64f}.sync-dot.rw{background:var(--green)}.sync-dot.err{background:var(--rose)}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px;padding:22px;max-width:1500px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .15s}
+.card:hover{transform:translateY(-3px)}
+.gallery{position:relative;height:200px;background:#eee6d8;overflow:hidden}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery .nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.35);color:#fff;border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:14px}
+.gallery .prev{left:8px}.gallery .next{right:8px}
+.gallery .noimg{display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:13px}
+.gallery .count{position:absolute;bottom:8px;right:10px;background:rgba(0,0,0,.45);color:#fff;font-size:11px;padding:2px 8px;border-radius:10px}
+.card-body{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column;gap:8px}
+.card-title{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card-title h2{font-size:18px}
+.fav{cursor:pointer;font-size:20px;border:none;background:none;line-height:1}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--chip);border-radius:20px;padding:2px 10px;font-size:12px;color:#6b5f4d}
+.chip.price{background:#f0e6d6;color:var(--accent-dark);font-weight:600}
+.chip.warn{background:#f7e8e8;color:var(--rose)}
+.pkg-mini{font-size:13px;color:#555;border-top:1px dashed var(--line);padding-top:8px}
+.pkg-mini li{list-style:none;display:flex;justify-content:space-between;padding:2px 0}
+.pkg-mini .pname{color:#444}
+.pkg-mini .pprice{color:var(--accent-dark);font-weight:600;white-space:nowrap}
+.card-actions{display:flex;gap:8px;margin-top:auto;padding-top:10px;align-items:center}
+.card-actions .cmp{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--muted);cursor:pointer;user-select:none}
+.status-sel{font-size:12px;border:1px solid var(--line);border-radius:6px;padding:3px 6px;background:#fff;color:var(--muted)}
+.overlay{position:fixed;inset:0;background:rgba(40,30,15,.5);display:none;align-items:flex-start;justify-content:center;z-index:100;overflow-y:auto;padding:30px 14px}
+.overlay.show{display:flex}
+.modal{background:#fff;border-radius:16px;max-width:860px;width:100%;padding:26px 28px;position:relative;margin-bottom:40px}
+.modal .close{position:absolute;top:14px;right:16px;border:none;background:none;font-size:22px;cursor:pointer;color:var(--muted)}
+.modal h2{color:var(--accent-dark);margin-bottom:4px}
+.modal .sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+.modal h3{font-size:15px;margin:18px 0 8px;color:#6b5f4d;border-left:3px solid var(--gold);padding-left:8px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#f8f3ea;color:#6b5f4d;font-weight:600;white-space:nowrap}
+.mgal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:6px}
+.mgal img{width:100%;height:110px;object-fit:cover;border-radius:8px;cursor:pointer}
+.links a{color:var(--accent-dark);font-size:13px;display:inline-block;margin-right:14px}
+.note-box{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;font-size:13px;font-family:inherit;min-height:60px;background:#fffdf8}
+ul.plain{padding-left:18px;font-size:13px;color:#555}
+#cmpbar{position:fixed;bottom:0;left:0;right:0;background:#3d3427;color:#fff;padding:10px 20px;display:none;align-items:center;gap:14px;z-index:90;justify-content:center;flex-wrap:wrap}
+#cmpbar.show{display:flex}
+#cmpbar .names{font-size:13px}
+.cmp-table-wrap{overflow-x:auto}
+.cmp-table-wrap table{min-width:600px}
+.cmp-table-wrap th:first-child{position:sticky;left:0;background:#f8f3ea;z-index:2}
+footer{padding:26px 24px 40px;text-align:center;color:var(--muted);font-size:13px;border-top:1px solid var(--line);margin-top:20px}
+footer a{color:var(--accent-dark)}
+.badge-pending{background:#f7e8e8;color:var(--rose);font-size:11px;padding:2px 8px;border-radius:10px;white-space:nowrap}
+textarea.json-in{width:100%;min-height:220px;font-family:Menlo,monospace;font-size:12px;border:1px solid var(--line);border-radius:8px;padding:10px}
+.hint{font-size:12px;color:var(--muted);margin:8px 0}
+input.txt{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px;margin:4px 0 10px}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:200;cursor:zoom-out}
+.lightbox.show{display:flex}
+.lightbox img{max-width:94vw;max-height:92vh;border-radius:6px}
+@media(max-width:640px){#grid{grid-template-columns:1fr;padding:14px}.modal{padding:20px 16px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>💐 婚宴飯店比較</h1>
+  <p>台北候選場地・方案 / 價格 / 場地 / 照片一覽（正式價格以飯店報價為準）</p>
+</header>
+
+<div class="toolbar">
+  <label>區域 <select id="fArea"><option value="">全部</option></select></label>
+  <label>預計桌數 <input type="number" id="fTables" min="1" style="width:70px" placeholder="如 15"></label>
+  <label>每桌預算上限 <input type="number" id="fBudget" min="0" step="1000" style="width:90px" placeholder="如 30000"></label>
+  <label>排序 <select id="fSort">
+    <option value="default">預設</option>
+    <option value="priceAsc">最低價 ↑</option>
+    <option value="priceDesc">最低價 ↓</option>
+    <option value="fav">收藏優先</option>
+  </select></label>
+  <label><input type="checkbox" id="fFavOnly"> 只看收藏</label>
+  <button class="btn" id="btnAdd">＋ 新增飯店</button>
+  <button class="btn" id="btnExport">匯出</button>
+  <button class="btn" id="btnSync"><span class="sync-dot off" id="syncDot"></span><span id="syncLabel">同步設定</span></button>
+</div>
+
+<div id="grid"></div>
+
+<div id="cmpbar">
+  <span class="names" id="cmpNames"></span>
+  <button class="btn primary small" id="btnCompare">比較</button>
+  <button class="btn small" id="btnClearCmp" style="color:#fff;border-color:#aaa">清除</button>
+</div>
+
+<div class="overlay" id="detailOverlay"><div class="modal" id="detailModal"></div></div>
+<div class="overlay" id="cmpOverlay"><div class="modal" style="max-width:1100px" id="cmpModal"></div></div>
+
+<div class="overlay" id="addOverlay"><div class="modal">
+  <button class="close" onclick="closeOverlay('addOverlay')">✕</button>
+  <h2>新增飯店</h2>
+  <p class="hint">建議做法：把飯店婚宴頁網址丟給 Claude，請它「幫我把這間加進 wedding-venues 的 data.js」並 push，全站永久保存。<br>
+  這裡貼 JSON 新增的飯店會存進共享的 state.json（已設定同步時雙方都看得到）。格式規範見 README.md。</p>
+  <textarea class="json-in" id="jsonIn"></textarea>
+  <div style="margin-top:10px;display:flex;gap:10px">
+    <button class="btn primary" onclick="addVenueFromJSON()">加入</button>
+    <button class="btn" onclick="fillTemplate()">填入範本</button>
+  </div>
+  <p class="hint" id="addMsg"></p>
+</div></div>
+
+<div class="overlay" id="syncOverlay"><div class="modal" style="max-width:560px">
+  <button class="close" onclick="closeOverlay('syncOverlay')">✕</button>
+  <h2>☁️ 兩人同步設定</h2>
+  <p class="hint">收藏、狀態、備註、自訂飯店會存到 GitHub repo 的 <b>state.json</b>。你和另一半各自在自己的裝置上填一次 Token，之後改動就會自動同步（最後儲存者為準）。Token 只存在這台裝置的瀏覽器裡。</p>
+  <label class="hint">GitHub 帳號（owner）</label>
+  <input class="txt" id="syncOwner" placeholder="自動偵測，或手動填">
+  <label class="hint">Repo 名稱</label>
+  <input class="txt" id="syncRepo" placeholder="wedding-venues">
+  <label class="hint">Fine-grained Personal Access Token（僅需此 repo 的 Contents 讀寫權限，建立方式見 README）</label>
+  <input class="txt" id="syncToken" type="password" placeholder="github_pat_...">
+  <div style="display:flex;gap:10px">
+    <button class="btn primary" onclick="saveSyncConfig()">儲存並測試</button>
+    <button class="btn" onclick="clearSyncConfig()">清除設定</button>
+  </div>
+  <p class="hint" id="syncMsg"></p>
+</div></div>
+
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('show')"><img id="lightboxImg" src=""></div>
+
+<footer>
+  參考連結：
+  <a href="https://asianweddingpage.com.tw/expo-bc-20260704_05-1/" target="_blank">亞洲婚禮風尚展</a> ·
+  <a href="https://www.dcard.tw/f/marriage/p/261480165" target="_blank">Dcard 婚宴心得</a> ·
+  <a href="https://www.weddings.tw/%E5%8F%B0%E5%8C%97%E5%A9%9A%E5%AE%B4%E6%8E%A8%E8%96%A6%E8%BE%A6%E5%A9%9A%E7%A6%AE%E7%9A%84%E5%96%9C%E5%AE%B4%E5%A0%B4%E5%9C%B0%E8%B3%87%E8%A8%8A/" target="_blank">weddings.tw 場地整理</a>
+  <br><br>照片來源為各飯店官網，若無法顯示會自動隱藏。飯店資料在 data.js，共享標記在 state.json（詳見 README.md）。
+</footer>
+
+<script src="data.js"></script>
+<script>
+// ============ 共享狀態（favs / statuses / notes / custom）============
+const LS_STATE="wv_state_v1", LS_SYNC="wv_sync_v1";
+let state={favs:{},statuses:{},notes:{},custom:[]};
+try{Object.assign(state,JSON.parse(localStorage.getItem(LS_STATE))||{})}catch(e){}
+state.favs=state.favs||{};state.statuses=state.statuses||{};state.notes=state.notes||{};state.custom=state.custom||[];
+function allVenues(){return VENUES.concat(state.custom)}
+
+// ============ GitHub 同步 ============
+const SYNC={owner:"",repo:"",token:"",mode:"off",timer:null,busy:false,pending:false};
+function b64encode(s){return btoa(String.fromCharCode(...new TextEncoder().encode(s)))}
+function b64decode(b){return new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\n/g,"")),c=>c.charCodeAt(0)))}
+function ghHeaders(){const h={Accept:"application/vnd.github+json"};if(SYNC.token)h.Authorization="Bearer "+SYNC.token;return h}
+function stateUrl(){return `https://api.github.com/repos/${SYNC.owner}/${SYNC.repo}/contents/state.json`}
+
+function loadSyncConfig(){
+  let cfg={};try{cfg=JSON.parse(localStorage.getItem(LS_SYNC))||{}}catch(e){}
+  SYNC.owner=cfg.owner||"";SYNC.repo=cfg.repo||"";SYNC.token=cfg.token||"";
+  if(!SYNC.owner&&location.hostname.endsWith(".github.io")){
+    SYNC.owner=location.hostname.split(".")[0];
+    SYNC.repo=SYNC.repo||location.pathname.split("/").filter(Boolean)[0]||"";
+  }
+}
+function persistSyncConfig(){localStorage.setItem(LS_SYNC,JSON.stringify({owner:SYNC.owner,repo:SYNC.repo,token:SYNC.token}))}
+
+async function pullState(){
+  if(!SYNC.owner||!SYNC.repo){setSyncUI("off");return}
+  try{
+    const r=await fetch(stateUrl()+"?t="+Date.now(),{headers:ghHeaders()});
+    if(r.status===404){setSyncUI(SYNC.token?"rw":"ro");return} // repo 存在但還沒有 state.json
+    if(!r.ok)throw new Error(r.status);
+    const j=await r.json();
+    const remote=JSON.parse(b64decode(j.content));
+    state={favs:remote.favs||{},statuses:remote.statuses||{},notes:remote.notes||{},custom:remote.custom||[]};
+    localStorage.setItem(LS_STATE,JSON.stringify(state));
+    setSyncUI(SYNC.token?"rw":"ro");
+  }catch(e){setSyncUI("err")}
+}
+function scheduleSync(){
+  localStorage.setItem(LS_STATE,JSON.stringify(state));
+  if(!SYNC.token||!SYNC.owner||!SYNC.repo)return;
+  clearTimeout(SYNC.timer);
+  SYNC.timer=setTimeout(pushState,1500);
+}
+async function pushState(){
+  if(SYNC.busy){SYNC.pending=true;return}
+  SYNC.busy=true;setSyncLabel("同步中…");
+  try{
+    let sha;
+    const g=await fetch(stateUrl()+"?t="+Date.now(),{headers:ghHeaders()});
+    if(g.ok)sha=(await g.json()).sha;
+    const body={message:"update state.json（收藏/備註同步）",content:b64encode(JSON.stringify(state,null,2))};
+    if(sha)body.sha=sha;
+    const p=await fetch(stateUrl(),{method:"PUT",headers:{...ghHeaders(),"Content-Type":"application/json"},body:JSON.stringify(body)});
+    if(!p.ok)throw new Error(p.status);
+    setSyncUI("rw");
+  }catch(e){setSyncUI("err")}
+  SYNC.busy=false;
+  if(SYNC.pending){SYNC.pending=false;pushState()}
+}
+function setSyncLabel(t){document.getElementById("syncLabel").textContent=t}
+function setSyncUI(mode){
+  SYNC.mode=mode;
+  const dot=document.getElementById("syncDot");
+  dot.className="sync-dot "+(mode==="rw"?"rw":mode==="ro"?"ro":mode==="err"?"err":"off");
+  setSyncLabel(mode==="rw"?"已同步":mode==="ro"?"唯讀（未填Token）":mode==="err"?"同步失敗":"同步設定");
+}
+document.getElementById("btnSync").onclick=()=>{
+  document.getElementById("syncOwner").value=SYNC.owner;
+  document.getElementById("syncRepo").value=SYNC.repo;
+  document.getElementById("syncToken").value=SYNC.token;
+  document.getElementById("syncMsg").textContent="";
+  document.getElementById("syncOverlay").classList.add("show");
+};
+async function saveSyncConfig(){
+  SYNC.owner=document.getElementById("syncOwner").value.trim();
+  SYNC.repo=document.getElementById("syncRepo").value.trim();
+  SYNC.token=document.getElementById("syncToken").value.trim();
+  persistSyncConfig();
+  const msg=document.getElementById("syncMsg");
+  msg.textContent="測試中…";
+  try{
+    const r=await fetch(`https://api.github.com/repos/${SYNC.owner}/${SYNC.repo}`,{headers:ghHeaders()});
+    if(!r.ok)throw new Error("無法存取 repo（"+r.status+"）");
+    msg.textContent="✅ 連線成功";
+    await pullState();render();
+    if(SYNC.token)scheduleSync(); // 立即把本機狀態推上去一次
+  }catch(e){msg.textContent="⚠️ "+e.message;setSyncUI("err")}
+}
+function clearSyncConfig(){
+  localStorage.removeItem(LS_SYNC);SYNC.token="";
+  document.getElementById("syncToken").value="";
+  document.getElementById("syncMsg").textContent="已清除（資料仍在本機與 repo 中）";
+  setSyncUI("off");
+}
+
+// ============ helpers ============
+function minPrice(v){const ps=v.packages.filter(p=>p.price).map(p=>p.price);return ps.length?Math.min(...ps):null}
+function fmt(n){return n?n.toLocaleString("zh-TW"):"—"}
+function perPerson(p,unit){return p?Math.round(p/(unit||10)):null}
+function esc(s){return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function maxTables(v){
+  let m=0;
+  v.halls.forEach(h=>{const nums=(h.tables||"").match(/\d+/g);if(nums)nums.forEach(n=>{m=Math.max(m,+n)});if((h.tables||"").includes("以上"))m=Math.max(m,99)});
+  return m;
+}
+
+// ============ render ============
+const galIdx={};
+let cmpSet=new Set();
+
+function render(){
+  const area=document.getElementById("fArea").value;
+  const tables=+document.getElementById("fTables").value||0;
+  const budget=+document.getElementById("fBudget").value||0;
+  const sort=document.getElementById("fSort").value;
+  const favOnly=document.getElementById("fFavOnly").checked;
+
+  let list=allVenues().filter(v=>{
+    if(area&&v.area!==area)return false;
+    if(favOnly&&!state.favs[v.id])return false;
+    if(budget){const mp=minPrice(v);if(mp&&mp>budget)return false}
+    if(tables){const mt=maxTables(v);if(mt&&mt<tables)return false}
+    return true;
+  });
+  if(sort==="priceAsc")list.sort((a,b)=>(minPrice(a)||1e9)-(minPrice(b)||1e9));
+  if(sort==="priceDesc")list.sort((a,b)=>(minPrice(b)||0)-(minPrice(a)||0));
+  if(sort==="fav")list.sort((a,b)=>(state.favs[b.id]?1:0)-(state.favs[a.id]?1:0));
+
+  const grid=document.getElementById("grid");
+  grid.innerHTML=list.map(v=>{
+    const idx=galIdx[v.id]||0;
+    const imgs=v.images||[];
+    const mp=minPrice(v);
+    const pending=v.status&&v.status.startsWith("待補");
+    return `<div class="card">
+      <div class="gallery">
+        ${imgs.length?`<img src="${imgs[idx%imgs.length]}" loading="lazy" onclick="openDetail('${v.id}')" onerror="imgFail(this,'${v.id}')">
+          ${imgs.length>1?`<button class="nav prev" onclick="galNav('${v.id}',-1)">‹</button><button class="nav next" onclick="galNav('${v.id}',1)">›</button><span class="count">${idx%imgs.length+1}/${imgs.length}</span>`:""}`
+        :`<div class="noimg" onclick="openDetail('${v.id}')">尚無照片</div>`}
+      </div>
+      <div class="card-body">
+        <div class="card-title">
+          <h2 onclick="openDetail('${v.id}')" style="cursor:pointer">${esc(v.name)}</h2>
+          <button class="fav" onclick="toggleFav('${v.id}')">${state.favs[v.id]?"❤️":"🤍"}</button>
+        </div>
+        <div class="chips">
+          <span class="chip">📍 ${esc(v.area)}</span>
+          ${mp?`<span class="chip price">每桌 ${fmt(mp)} 起${v.packages.some(p=>p.unit===12)?"（12人）":""}</span>`:`<span class="chip warn">價格需洽詢</span>`}
+          ${pending?`<span class="badge-pending">${esc(v.status)}</span>`:""}
+        </div>
+        <div class="chips">${(v.tags||[]).slice(0,3).map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</div>
+        <ul class="pkg-mini">
+          ${v.packages.slice(0,3).map(p=>`<li><span class="pname">${esc(p.name)}${p.dateType?`（${esc(p.dateType)}）`:""}</span><span class="pprice">${p.price?fmt(p.price):"洽詢"}</span></li>`).join("")}
+        </ul>
+        <div class="card-actions">
+          <button class="btn small" onclick="openDetail('${v.id}')">詳細</button>
+          <label class="cmp"><input type="checkbox" ${cmpSet.has(v.id)?"checked":""} onchange="toggleCmp('${v.id}',this.checked)"> 比較</label>
+          <select class="status-sel" onchange="setStatus('${v.id}',this.value)">
+            ${["未聯絡","已詢價","已試菜","候選","淘汰"].map(s=>`<option ${state.statuses[v.id]===s?"selected":""}>${s}</option>`).join("")}
+          </select>
+        </div>
+      </div>
+    </div>`;
+  }).join("")||`<p style="grid-column:1/-1;text-align:center;color:var(--muted);padding:40px">沒有符合條件的飯店</p>`;
+}
+
+function imgFail(el,id){
+  const v=allVenues().find(x=>x.id===id);
+  if(!v)return;
+  const src=el.getAttribute("src");
+  v.images=v.images.filter(u=>u!==src&&encodeURI(u)!==src);
+  galIdx[id]=0; render();
+}
+function galNav(id,d){const v=allVenues().find(x=>x.id===id);galIdx[id]=((galIdx[id]||0)+d+v.images.length)%v.images.length;render()}
+function toggleFav(id){state.favs[id]=!state.favs[id];scheduleSync();render()}
+function setStatus(id,s){state.statuses[id]=s;scheduleSync()}
+function toggleCmp(id,on){on?cmpSet.add(id):cmpSet.delete(id);updateCmpBar();render()}
+function updateCmpBar(){
+  const bar=document.getElementById("cmpbar");
+  if(cmpSet.size>=1){bar.classList.add("show");
+    document.getElementById("cmpNames").textContent=[...cmpSet].map(id=>allVenues().find(v=>v.id===id).name).join("、");
+  }else bar.classList.remove("show");
+}
+
+// ============ detail ============
+function openDetail(id){
+  const v=allVenues().find(x=>x.id===id);if(!v)return;
+  const m=document.getElementById("detailModal");
+  m.innerHTML=`
+    <button class="close" onclick="closeOverlay('detailOverlay')">✕</button>
+    <h2>${esc(v.name)}</h2>
+    <p class="sub">📍 ${esc(v.area)}${v.phone?`　☎ ${esc(v.phone)}`:""}　<a href="${v.website}" target="_blank" style="color:var(--accent-dark)">官網婚宴頁 ↗</a></p>
+    <div class="chips">${(v.tags||[]).map(t=>`<span class="chip">${esc(t)}</span>`).join("")}</div>
+    ${v.images.length?`<h3>照片（點擊放大）</h3><div class="mgal">${v.images.map(u=>`<img src="${u}" loading="lazy" onerror="this.remove()" onclick="openLightbox('${u}')">`).join("")}</div>`:""}
+    <h3>方案</h3>
+    <table><tr><th>方案</th><th>每桌價格</th><th>每人約</th><th>備註</th></tr>
+      ${v.packages.map(p=>`<tr><td>${esc(p.name)}${p.dateType?`<br><span style="color:var(--rose);font-size:12px">${esc(p.dateType)}</span>`:""}</td>
+        <td>${p.price?fmt(p.price)+"（"+(p.unit||10)+"人桌）":"需洽詢"}</td>
+        <td>${p.price?fmt(perPerson(p.price,p.unit)):"—"}</td>
+        <td>${esc(p.note||"")}</td></tr>`).join("")}
+    </table>
+    ${v.minSpend?`<p class="hint" style="margin-top:6px">💰 ${esc(v.minSpend)}</p>`:""}
+    ${v.halls.length?`<h3>場地</h3>
+    <table><tr><th>廳別</th><th>桌數</th><th>坪數 / 特色</th></tr>
+      ${v.halls.map(h=>`<tr><td>${esc(h.name)}</td><td>${esc(h.tables||"—")}</td><td>${esc([h.size,h.height].filter(Boolean).join("・")||"—")}</td></tr>`).join("")}
+    </table>`:""}
+    ${v.extras&&v.extras.length?`<h3>禮遇 / 加購</h3><ul class="plain">${v.extras.map(e=>`<li>${esc(e)}</li>`).join("")}</ul>`:""}
+    ${v.pdfs&&v.pdfs.length?`<h3>官方文件</h3><p class="links">${v.pdfs.map(p=>`<a href="${p.url}" target="_blank">📄 ${esc(p.name)}</a>`).join("")}</p>`:""}
+    <h3>共同備註（會同步）</h3>
+    <textarea class="note-box" oninput="saveNote('${v.id}',this.value)" placeholder="試菜心得、報價、聯絡窗口…">${esc(state.notes[v.id]||"")}</textarea>
+  `;
+  document.getElementById("detailOverlay").classList.add("show");
+}
+function saveNote(id,val){state.notes[id]=val;scheduleSync()}
+function openLightbox(u){document.getElementById("lightboxImg").src=u;document.getElementById("lightbox").classList.add("show")}
+function closeOverlay(id){document.getElementById(id).classList.remove("show")}
+document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)o.classList.remove("show")}));
+
+// ============ compare ============
+document.getElementById("btnCompare").onclick=()=>{
+  const vs=[...cmpSet].map(id=>allVenues().find(v=>v.id===id));
+  const rows=[
+    ["區域",v=>esc(v.area)],
+    ["電話",v=>esc(v.phone||"—")],
+    ["最低每桌價",v=>{const mp=minPrice(v);return mp?fmt(mp)+"<br><span style='color:var(--muted);font-size:11px'>每人約 "+fmt(perPerson(mp,v.packages.find(p=>p.price===mp).unit))+"</span>":"需洽詢"}],
+    ["方案",v=>v.packages.map(p=>`${esc(p.name)}：${p.price?fmt(p.price)+"（"+(p.unit||10)+"人）":"洽詢"}`).join("<br>")],
+    ["場地",v=>v.halls.map(h=>`${esc(h.name)} ${esc(h.tables||"")}`).join("<br>")||"—"],
+    ["低消",v=>esc(v.minSpend||"—")],
+    ["禮遇/加購",v=>(v.extras||[]).map(esc).join("<br>")||"—"],
+    ["特色",v=>(v.tags||[]).map(esc).join("、")],
+    ["我們的狀態",v=>esc(state.statuses[v.id]||"未聯絡")],
+    ["備註",v=>esc(state.notes[v.id]||"—")]
+  ];
+  document.getElementById("cmpModal").innerHTML=`
+    <button class="close" onclick="closeOverlay('cmpOverlay')">✕</button>
+    <h2>方案比較</h2>
+    <div class="cmp-table-wrap"><table>
+      <tr><th></th>${vs.map(v=>`<th>${esc(v.name)}</th>`).join("")}</tr>
+      ${rows.map(([label,fn])=>`<tr><th>${label}</th>${vs.map(v=>`<td>${fn(v)}</td>`).join("")}</tr>`).join("")}
+    </table></div>`;
+  document.getElementById("cmpOverlay").classList.add("show");
+};
+document.getElementById("btnClearCmp").onclick=()=>{cmpSet.clear();updateCmpBar();render()};
+
+// ============ add venue ============
+document.getElementById("btnAdd").onclick=()=>{document.getElementById("addOverlay").classList.add("show")};
+function fillTemplate(){
+  document.getElementById("jsonIn").value=JSON.stringify({
+    id:"my-hotel", name:"飯店名稱", area:"區域", phone:"", website:"https://",
+    tags:["特色1"], halls:[{name:"宴會廳",tables:"10 桌",size:"",height:""}],
+    packages:[{name:"專案名",price:28000,unit:10,note:"+10%",dateType:""}],
+    extras:["禮遇1"], minSpend:"", images:["https://..."], pdfs:[], status:"完整"
+  },null,2);
+}
+function addVenueFromJSON(){
+  const msg=document.getElementById("addMsg");
+  try{
+    const v=JSON.parse(document.getElementById("jsonIn").value);
+    if(!v.id||!v.name)throw new Error("需要 id 與 name 欄位");
+    if(allVenues().some(x=>x.id===v.id))throw new Error("id 已存在，請換一個");
+    v.packages=v.packages||[];v.halls=v.halls||[];v.images=v.images||[];v.tags=v.tags||[];
+    state.custom.push(v);scheduleSync();
+    populateAreas();render();closeOverlay("addOverlay");
+    msg.textContent="";
+    document.getElementById("jsonIn").value="";
+  }catch(e){msg.textContent="⚠️ "+e.message}
+}
+document.getElementById("btnExport").onclick=()=>{
+  const blob=new Blob([JSON.stringify({venues:allVenues(),state},null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="婚宴飯店資料.json";a.click();
+};
+
+// ============ init ============
+function populateAreas(){
+  const sel=document.getElementById("fArea");
+  const cur=sel.value;
+  sel.innerHTML=`<option value="">全部</option>`+[...new Set(allVenues().map(v=>v.area))].map(a=>`<option ${a===cur?"selected":""}>${esc(a)}</option>`).join("");
+}
+["fArea","fTables","fBudget","fSort","fFavOnly"].forEach(id=>document.getElementById(id).addEventListener("input",render));
+loadSyncConfig();
+// 一次性設定連結：把 https://.../#setup=<token> 傳給另一半，點開即完成同步設定
+(function(){
+  const m=location.hash.match(/^#setup=(.+)$/);
+  if(m){
+    SYNC.token=decodeURIComponent(m[1]);
+    persistSyncConfig();
+    history.replaceState(null,"",location.pathname+location.search);
+    setTimeout(()=>alert("✅ 同步已開啟！之後正常使用即可，收藏和備註會自動跟另一半共享。"),300);
+  }
+})();
+populateAreas();render();
+pullState().then(()=>{populateAreas();render()});
+</script>
+</body>
+</html>
