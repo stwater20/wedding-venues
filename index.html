@@ -141,8 +141,9 @@ input.txt{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius
   <input class="txt" id="syncToken" type="password" placeholder="github_pat_...">
   <label class="hint">備註加密密語（選填。兩人填同一組，備註在雲端就是加密亂碼，只有你們看得到）</label>
   <input class="txt" id="syncPass" type="password" placeholder="例如：我們的紀念日">
-  <div style="display:flex;gap:10px">
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
     <button class="btn primary" onclick="saveSyncConfig()">儲存並測試</button>
+    <button class="btn" onclick="copyShareLink()">📋 複製給另一半的連結</button>
     <button class="btn" onclick="clearSyncConfig()">清除設定</button>
   </div>
   <p class="hint" id="syncMsg"></p>
@@ -295,6 +296,19 @@ async function saveSyncConfig(){
     await pullState();render();
     if(SYNC.token)scheduleSync(); // 立即把本機狀態推上去一次
   }catch(e){msg.textContent="⚠️ "+e.message;setSyncUI("err")}
+}
+async function copyShareLink(){
+  const token=document.getElementById("syncToken").value.trim();
+  const pass=document.getElementById("syncPass").value;
+  const msg=document.getElementById("syncMsg");
+  if(!token){msg.textContent="⚠️ 請先填 Token 再產生連結";return}
+  const link=location.origin+location.pathname+"#setup="+encodeURIComponent(token)+(pass?"&pass="+encodeURIComponent(pass):"");
+  try{
+    await navigator.clipboard.writeText(link);
+    msg.textContent="✅ 已複製！傳給另一半，點開就自動完成同步"+(pass?"＋加密":"")+"設定。連結含 Token，只私下傳給她。";
+  }catch(e){
+    prompt("複製失敗，請手動複製：",link);
+  }
 }
 function clearSyncConfig(){
   localStorage.removeItem(LS_SYNC);SYNC.token="";SYNC.pass="";
