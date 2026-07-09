@@ -24,6 +24,7 @@ header p{color:var(--muted);font-size:13px;margin-top:4px}
 .btn.primary{background:var(--accent);color:#fff}
 .btn.primary:hover{background:var(--accent-dark)}
 .btn.small{padding:4px 10px;font-size:12px}
+a.btn{text-decoration:none;display:inline-block}
 .sync-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:1px}
 .sync-dot.off{background:#bbb}.sync-dot.ro{background:#e0b64f}.sync-dot.rw{background:var(--green)}.sync-dot.err{background:var(--rose)}
 #grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px;padding:22px;max-width:1500px;margin:0 auto}
@@ -103,6 +104,8 @@ input.txt{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius
   <button class="btn" id="btnAdd">＋ 新增飯店</button>
   <button class="btn" id="btnExport">匯出</button>
   <button class="btn" id="btnSync"><span class="sync-dot off" id="syncDot"></span><span id="syncLabel">同步設定</span></button>
+  <a class="btn" href="https://github.com/stwater20/wedding-venues" target="_blank" rel="noopener" title="到 GitHub 看 README 教學">📖 GitHub</a>
+  <a class="btn" href="https://github.com/stwater20/wedding-venues/stargazers" target="_blank" rel="noopener" title="覺得好用給顆星星">⭐ Star</a>
 </div>
 
 <div id="grid"></div>
@@ -119,8 +122,8 @@ input.txt{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius
 <div class="overlay" id="addOverlay"><div class="modal">
   <button class="close" onclick="closeOverlay('addOverlay')">✕</button>
   <h2>新增飯店</h2>
-  <p class="hint">建議做法：把飯店婚宴頁網址丟給 Claude，請它「幫我把這間加進 wedding-venues 的 data.js」並 push，全站永久保存。<br>
-  這裡貼 JSON 新增的飯店會存進共享的 state.json（已設定同步時雙方都看得到）。格式規範見 README.md。</p>
+  <p class="hint">正式資料建議直接編輯 repo 的 <b>data.js</b>（或發 PR），全站永久保存。<br>
+  這裡貼 JSON 新增的飯店會存進共享的 state.json（已設定同步時雙方都看得到）。格式規範見 <a href="https://github.com/stwater20/wedding-venues" target="_blank" rel="noopener">README</a>。</p>
   <textarea class="json-in" id="jsonIn"></textarea>
   <div style="margin-top:10px;display:flex;gap:10px">
     <button class="btn primary" onclick="addVenueFromJSON()">加入</button>
