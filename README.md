@@ -105,6 +105,8 @@ Claude 會抓官網資料、整理成下方格式、更新 `data.js` 並協助 p
 - 首次設定：repo → Settings → Pages → Source 選 **GitHub Actions**
 - 網址：`https://<帳號>.github.io/wedding-venues/`
 
-## 免責
+## 免責與資料移除
 
-所有價格與方案內容為官網公開資訊的整理，僅供比較參考，正式價格以各飯店報價為準。照片版權屬各飯店官網。
+所有價格與方案內容為官網及公開媒體（新娘物語 weddings.tw 等）資訊的整理，僅供個人比較參考，非商業用途，正式價格以各飯店報價為準。照片採直連原站方式呈現，版權屬原網站所有。
+
+若您是資料或照片所有者希望移除內容，請至本 repo 的 [GitHub Issues](https://github.com/stwater20/wedding-venues/issues) 提出，會盡快下架。

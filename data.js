@@ -237,5 +237,346 @@ const VENUES = [
  halls:[], packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
  extras:[], minSpend:"", images:[], pdfs:[],
  status:"待補（需洽詢）"
+},
+
+/* ===== 以下來自新娘物語「台北 40+ 婚宴場地懶人包」（2025/05，僅起桌價與基本資訊，詳細方案需洽詢） ===== */
+{
+ id:"regent", name:"台北晶華酒店", area:"中山", phone:"(02) 2523-8000",
+ website:"https://www.regenttaipei.com/",
+ tags:["270度光雕投影","挑高無樑柱","晶華軒粵菜"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:20800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"",
+ images:["https://img.weddings.tw/weddings/wp-content/uploads/2025/12/2025122209291477.jpg"],
+ pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"hilai", name:"台北漢來大飯店", area:"南港", phone:"(02) 2785-8086",
+ website:"https://www.hilai-foods.com/",
+ tags:["漢來美食粵菜","天空森林戶外禮堂","摩登輕奢挑高廳"],
+ halls:[],
+ packages:[
+  {name:"婚宴專案（起桌價）", price:28800, unit:10, note:"+10%，來源：新娘物語", dateType:""},
+  {name:"指定日專案", price:23800, unit:10, note:"+10%，來源：新娘物語", dateType:"指定日"}
+ ],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"shanghai-chengde", name:"上海鄉村 承德本家", area:"台北車站", phone:"0911-776-177",
+ website:"",
+ tags:["上海江浙菜","近台北車站","8–14桌小型婚宴"],
+ halls:[{name:"宴會廳", tables:"8–14 桌", size:"", height:""}],
+ packages:[{name:"婚宴專案（起桌價）", price:22800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"",
+ images:["https://img.weddings.tw/weddings/wp-content/uploads/2026/01/2026012705110127.jpg"],
+ pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"sheraton", name:"台北喜來登大飯店", area:"中正", phone:"(02) 2321-5511",
+ website:"https://www.sheratongrandtaipei.com/",
+ tags:["市中心近善導寺站","大小廳選擇多","經典氣派"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:16800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"",
+ images:["https://img.weddings.tw/weddings/wp-content/uploads/2025/03/2025090503511911.jpg"],
+ pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"riviera", name:"歐華酒店", area:"中山", phone:"(02) 2585-3258 #839",
+ website:"https://www.rivierataipei.com/",
+ tags:["歐式中庭","大理石旋梯","小桌數家宴"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:19800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"",
+ images:["https://img.weddings.tw/weddings/wp-content/uploads/2025/12/2026031610152492.jpg"],
+ pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"palais-de-chine", name:"台北君品酒店", area:"台北車站", phone:"(02) 2181-9999",
+ website:"https://www.palaisdechinehotel.com/tw/grand.php?id=5",
+ tags:["京站共構交通便利","亮廳水晶燈","東西美學融合"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:28800, unit:12, note:"+10%，保證桌數 25 桌，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"保證桌數 25 桌", images:[], pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"okura", name:"大倉久和大飯店", area:"中山", phone:"(02) 2181-5129",
+ website:"https://www.okurataipei.com.tw/",
+ tags:["日系細膩服務","一時段一場婚宴","挑高採光小型婚宴"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:19800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:["一時段僅服務一場婚宴"], minSpend:"",
+ images:["https://img.weddings.tw/weddings/wp-content/uploads/2025/05/2026032007144084.jpg"],
+ pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"jingyan-chanson", name:"晶宴會館 日光香頌", area:"中山", phone:"(02) 2517-9977",
+ website:"",
+ tags:["法式庭園戶外證婚","白金色系","挑高無樑柱"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:19900, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:["戶外證婚花園"], minSpend:"", images:[], pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"grand-view-beitou", name:"北投麗禧溫泉酒店", area:"北投", phone:"(02) 2898-8888",
+ website:"https://www.gvrb.com.tw/",
+ tags:["戶外水舞台證婚","山林環抱","近百坪無柱宴會廳"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:19800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"",
+ images:["https://img.weddings.tw/weddings/wp-content/uploads/2025/07/2025070107204053.jpg"],
+ pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"victoria", name:"大直維多麗亞酒店", area:"大直", phone:"(02) 8502-0007 #2381~2387",
+ website:"https://www.grandvictoria.com.tw/",
+ tags:["歐式戶外花園證婚","新古典風格","米其林推薦牛排館"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:18800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"jingyan-minquan", name:"晶宴會館 民權館", area:"中山", phone:"(02) 8773-4567",
+ website:"",
+ tags:["AI沉浸式投影婚宴","香榭玫瑰園","無樑柱多主題廳"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:19900, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"chateau-felicite", name:"翡麗詩莊園", area:"松山", phone:"(02) 6617-9888",
+ website:"",
+ tags:["純白玻璃教堂","半戶外花園","法式宴會廳"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:18800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:["教堂＋花園＋宴會廳一站式"], minSpend:"",
+ images:["https://img.weddings.tw/weddings/wp-content/uploads/2025/05/2026032402270610.jpg"],
+ pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"great-skyview", name:"格萊天漾大飯店", area:"萬華", phone:"(02) 2338-3366",
+ website:"https://www.g-skyview.com/wedding_list_1.php",
+ tags:["頂樓露台高空證婚","13樓天際線景觀","小資專案"],
+ halls:[],
+ packages:[{name:"2025 小資婚宴專案", price:19990, unit:10, note:"+10%，平日及指定假日限定，來源：新娘物語", dateType:"指定日"}],
+ extras:[], minSpend:"",
+ images:["https://www.weddings.tw/wp-content/uploads/2023/09/2023122010020411.jpg"],
+ pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"caesar-metro", name:"台北凱達大飯店", area:"萬華", phone:"(02) 2306-6777",
+ website:"https://www.caesarmetro.com/",
+ tags:["萬華車站共構","挑高7.2米宴會廳","紅金典雅"],
+ halls:[{name:"宴會廳", tables:"", size:"", height:"7.2m"}],
+ packages:[{name:"婚宴專案（起桌價）", price:18800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"",
+ images:["https://img.weddings.tw/weddings/wp-content/uploads/2025/05/202511070627116.jpg"],
+ pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"grand-hyatt", name:"台北君悅酒店", area:"信義", phone:"(02) 2720-1200 #3948",
+ website:"https://www.hyatt.com/grand-hyatt/taigh-grand-hyatt-taipei",
+ tags:["緊鄰101","凱悅廳挑高無柱","凱寓獨立戶外露台"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:29800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"",
+ images:["https://img.weddings.tw/weddings/wp-content/uploads/2025/05/2025112708352492.jpg"],
+ pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"hotel-royal", name:"台北老爺大酒店", area:"中山", phone:"(02) 2542-3266",
+ website:"https://www.hotelroyal.com.tw/taipei/",
+ tags:["明宮粵菜","中山北路落地窗","東方典雅"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:20800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"",
+ images:["https://img.weddings.tw/weddings/wp-content/uploads/2024/02/2024042203495256.jpg"],
+ pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"le-beaujour", name:"Le Beaujour 芃卓", area:"中山", phone:"(02) 2181-9950 #3500",
+ website:"",
+ tags:["法式私宅風格","近百人精緻婚禮","君品／WtoH團隊"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:18800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"可容納近百位賓客", images:[], pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"chalet-v", name:"CHALET V", area:"大直", phone:"",
+ website:"",
+ tags:["北美滑雪木屋","戶外證婚","雙酒吧 After Party"],
+ halls:[],
+ packages:[{name:"半自助餐（每位計價）", price:16080, unit:6, note:"每位 NT$2,680+10% 起、每桌 6 位（此為換算每桌價），來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"yayue-flagship", name:"雅悅會館 台北旗艦館", area:"南港", phone:"(02) 2788-7222",
+ website:"",
+ tags:["全台北唯一韓系風格","10米挑高無柱","三鐵共構"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:18888, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:["升降梯","LED屏幕","空飄花瓣機"], minSpend:"",
+ images:["https://img.weddings.tw/weddings/wp-content/uploads/2025/03/2025091006000125.jpg"],
+ pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"sun-liren-mansion", name:"孫立人將軍官邸", area:"中正", phone:"(02) 2321-6905",
+ website:"",
+ tags:["歷史建築","玻璃花房","文藝戶外證婚"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:19800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"movement88", name:"88號樂章莊園式宴會廳", area:"內湖", phone:"(02) 2794-3800",
+ website:"https://www.88mov5f.com/",
+ tags:["四大主題宴會廳","歐洲小鎮場景","新台灣海鮮料理"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:16800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"部分（僅起桌價）"
+},
+{
+ id:"gumgum-xinyi", name:"GUMGUM GROUP 信義本店", area:"信義", phone:"0972-021-357",
+ website:"https://www.gumgumonline.com.tw/",
+ tags:["工業風派對婚禮","包場制","Buffet 雞翅調酒"],
+ halls:[{name:"全店包場", tables:"35–70 人", size:"", height:""}],
+ packages:[{name:"包場", price:null, unit:10, note:"包場 NT$138,000（不收場租費），35–70 人，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"包場 NT$138,000", images:[], pdfs:[], status:"部分（包場價）"
+},
+{
+ id:"gumgum-neihu", name:"GUMGUM GROUP 內科店", area:"內湖", phone:"0972-021-357",
+ website:"https://www.gumgumonline.com.tw/",
+ tags:["工業風＋頂樓戶外","包場制","小型婚禮/After Party"],
+ halls:[{name:"全店包場", tables:"上限 110 人", size:"", height:""}],
+ packages:[{name:"包場", price:null, unit:10, note:"包場 NT$168,000（不收場租費），上限 110 人，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"包場 NT$168,000", images:[], pdfs:[], status:"部分（包場價）"
+},
+{
+ id:"gumgum-dome", name:"GUMGUM GROUP 小巨蛋店", area:"松山", phone:"0972-021-357",
+ website:"https://www.gumgumonline.com.tw/",
+ tags:["小巨蛋第一排","蛋形空間設計","包場制"],
+ halls:[{name:"全店包場", tables:"70–75 人", size:"", height:""}],
+ packages:[{name:"包場", price:null, unit:10, note:"包場 NT$154,000（不收場租費），70–75 人，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"包場 NT$154,000",
+ images:["https://img.weddings.tw/weddings/wp-content/uploads/2025/03/2025090202215558.jpg"],
+ pdfs:[], status:"部分（包場價）"
+},
+{
+ id:"fullon-taipei1", name:"福容大飯店 台北一館", area:"大安", phone:"(02) 2701-1239",
+ website:"https://www.fullon-hotels.com.tw/tp/tw/",
+ tags:["大安森林公園站旁","專屬電梯直達","地下停車場"],
+ halls:[],
+ packages:[{name:"婚宴專案（起桌價）", price:22800, unit:10, note:"+10%，來源：新娘物語", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"部分（僅起桌價）"
+},
+
+/* ===== 以下僅有電話與地址（新娘物語清單），方案價格需洽詢 ===== */
+{
+ id:"chin-chin-garden", name:"青青食尚花園會館", area:"士林", phone:"(02) 2841-1996",
+ website:"", tags:["花園會館"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"chin-chin-starlight", name:"青青星光 Wedding", area:"南港", phone:"(02) 2782-1638",
+ website:"", tags:["婚宴會館"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"longxuan", name:"龍軒傳承粵菜餐廳", area:"中山", phone:"(02) 2522-3999",
+ website:"", tags:["粵菜餐廳"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"howard-civil", name:"福華國際文教會館", area:"大安", phone:"(02) 7712-2323",
+ website:"", tags:["文教會館"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"shangri-la", name:"香格里拉台北遠東國際大飯店", area:"大安", phone:"(02) 7700-3032",
+ website:"", tags:["五星飯店"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"nantian-beitou", name:"北投南天豐玥泉飯店", area:"北投", phone:"(02) 2898-8661",
+ website:"", tags:["溫泉飯店"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"w-taipei", name:"台北 W 飯店", area:"信義", phone:"(02) 6631-8000",
+ website:"", tags:["時尚設計飯店"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"landis", name:"台北亞都麗緻大飯店", area:"中山", phone:"(02) 2597-1234",
+ website:"", tags:["歐風經典飯店"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"grand-hotel", name:"圓山大飯店", area:"中山", phone:"(02) 2886-1818 #1530~1533",
+ website:"", tags:["宮殿式地標","經典中式"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"howard-taipei", name:"台北福華大飯店", area:"大安", phone:"(02) 2326-7412",
+ website:"", tags:["仁愛路老牌飯店"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"silks-palace", name:"故宮晶華", area:"士林", phone:"(02) 2882-9393",
+ website:"", tags:["故宮旁","國宴級料理"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"spring-city", name:"北投春天酒店", area:"北投", phone:"(02) 2897-5555",
+ website:"", tags:["溫泉飯店"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"asia-pacific-beitou", name:"北投亞太飯店", area:"北投", phone:"(02) 2897-7999 #5059",
+ website:"", tags:["溫泉飯店"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"art1919", name:"1919 藝文中心", area:"中山", phone:"(02) 2517-5777",
+ website:"", tags:["藝文空間"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"pengyuan-yipin", name:"彭園婚宴 壹品宴", area:"中山", phone:"(02) 2541-9102",
+ website:"", tags:["湘菜婚宴"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"pengyuan-taipei", name:"彭園婚宴會館 台北館", area:"信義", phone:"(02) 2528-8122",
+ website:"", tags:["湘菜婚宴"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"top-taipei101", name:"頂鮮台北店（101 86樓）", area:"信義", phone:"(02) 8101-8686",
+ website:"", tags:["101 高樓景觀"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
+},
+{
+ id:"queen-cruise", name:"大河之戀皇后號", area:"關渡", phone:"(02) 2711-8887",
+ website:"", tags:["遊船婚宴","關渡碼頭登船"], halls:[],
+ packages:[{name:"婚宴專案", price:null, unit:10, note:"需洽詢", dateType:""}],
+ extras:[], minSpend:"", images:[], pdfs:[], status:"待補（需洽詢）"
 }
 ];
