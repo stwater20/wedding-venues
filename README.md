@@ -84,9 +84,19 @@ Claude 會抓官網資料、整理成下方格式、更新 `data.js` 並協助 p
 
    網頁會自動存好 token、從網址列清掉，顯示「✅ 同步已開啟」。
 
+### 備註加密（選填）
+
+「同步設定」裡可填一組**密語**（兩人要填同一組）。填了之後，備註存到 state.json 前會先在裝置上用 AES-GCM 加密，雲端只看得到亂碼，只有輸入相同密語的裝置能還原。收藏與狀態不加密（不敏感）。密語忘了會解不開舊備註，請挑好記的。
+
+分享連結也可以帶密語，一次設定完成：
+
+```
+https://<帳號>.github.io/wedding-venues/#setup=<token>&pass=<密語>
+```
+
 ### 產生 token 的步驟
 
-1. 到 GitHub → Settings → Developer settings → **Fine-grained personal access tokens** → Generate new token
+1. 直接開這個網址：**https://github.com/settings/personal-access-tokens/new**（或 GitHub 右上頭像 → Settings → 左欄最下面 Developer settings → Fine-grained personal access tokens → Generate new token）
 2. Repository access 選 **Only select repositories** → 只勾這個 repo
 3. Permissions → Repository permissions → **Contents** 設為 **Read and write**，其他都不用
 4. 產生後複製 token，打開網站 → 右上角「同步設定」→ 貼上 → 儲存並測試
